@@ -1,0 +1,38 @@
+
+
+
+
+
+
+{% block content %}
+
+    <div id="bookeasy__cart-gadget"></div>
+
+    <div id="bookeasy__details-gadget"></div>
+
+    <div id="bookeasy__conditions"></div>
+
+{% endblock %}
+
+
+
+
+
+{% block global_javascript %}
+    {{ parent() }}
+{% endblock %}
+
+
+{% block local_javascript %}
+
+    <script src="//gadgets.impartmedia.com/gadgets.jsz?key={{ bookeasy_key }}"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.js"></script>
+
+    <script src="../../js/bookeasy-mods.js"></script>
+
+    <script src="../../js/inline/details-gadget.js" inline></script>
+
+    <script src="../../js/inline/cart-gadget.js" inline></script>
+
+{% endblock %}

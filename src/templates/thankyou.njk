@@ -1,0 +1,37 @@
+<!-- reservoirs.njk -->
+{% set bookeasy_key = 'd5192d41822d0c987a0610af120d29bf' %}
+
+{% extends '_layouts/master.njk' %}
+
+
+
+{% block content %}
+
+    <div class="c-page-content c-page-content--full">
+
+        <div class="o-wrapper">{# o-wrapper--small #}
+            <div class="c-content">
+
+                <h1 class="c-content__title">Thank you</h1>
+
+                <p>Thank you for your booking.</p>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+
+{% block javascript %}
+    <script>
+        // var bookingsDisabled = true;
+    </script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script>
+        BEcssOverride = 'none';
+    </script>
+{% endblock %}

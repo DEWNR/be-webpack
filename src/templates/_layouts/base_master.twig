@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Base</title>
+
+    <link rel='manifest' href='/manifest.webmanifest'>
+    <meta name="theme-color" content="#184736">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-384.png">
+
+    {% set bookeasy_key = 'd5192d41822d0c987a0610af120d29bf' %}
+
+    {% block inhead %}{% endblock %}
+
+</head>
+<body>
+    {% block content %}{% endblock %}
+
+    {% block global_javascript %}
+        <script>
+
+            // Check compatibility for the browser we're running this in
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                    // Register the service worker
+                    navigator.serviceWorker.register('sw.js', {
+                        scope: "./"     //sets scope of service worker incase you couldn't put it in root of website
+                    })
+                    .then(function (reg) {
+                        console.log("Service worker has been registered for scope: " + reg.scope);
+                    });
+                });
+            }
+
+            // measure how much storage our app has used
+            navigator.storage.estimate().then(function(info) {
+                console.log( formatBytes(info.quota) ); // The total amount in bytes
+                console.log( formatBytes(info.usage) ); // How much data you’ve used so far in bytes
+            });
+
+
+            function formatBytes(bytes, decimals = 2) {
+                if (bytes === 0) return '0 Bytes';
+
+                const k = 1024;
+                const dm = decimals < 0 ? 0 : decimals;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+            }
+
+        </script>
+    {% endblock %}
+
+    {% block local_javascript %}{% endblock %}
+</body>
+</html>
+

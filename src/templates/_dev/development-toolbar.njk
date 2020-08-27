@@ -1,0 +1,99 @@
+{# == This is just a toolbar to navigate between templates, it should never make it to the live site so we can just keep all of the styles, markup and script in one place == #}
+
+<style>
+    #dev-toolbar {
+        background-color: #444;
+        display: none;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 99999;
+    }
+    #dev-toolbar a {
+        color: #fff;
+        text-decoration: none;
+        display: inline-block;
+    }
+    #close {
+        float: right;
+    }
+    #close, #toggle {
+        padding: 10px 20px;
+    }
+    #page-list {
+        margin: 0;
+        background-color: #333;
+        padding: 10px;
+    }
+    #page-list li {
+        list-style: none;
+        display: block;
+    }
+    #dev-toolbar #page-list li a {
+        padding: 10px 15px;
+    }
+
+    .dev-hide {
+        display: none !important;
+    }
+
+</style>
+
+<div id="dev-toolbar">
+
+    <ul id="page-list" class="dev-hide">
+        <li><a class="dev-nav-link" href="agents.html">Agent locations</a></li>
+        <li><a class="dev-nav-link" href="find-park.html">Find a park</a></li>
+        <li><a class="dev-nav-link" href="form.html">Form</a></li>
+        <li><a class="dev-nav-link" href="general.html">General content</a></li>
+        <li><a class="dev-nav-link" href="index.html">Homepage</a></li>
+        <li><a class="dev-nav-link" href="landing.html">Second level page</a></li>
+        <li><a class="dev-nav-link" href="map.html">Map</a></li>
+        <li><a class="dev-nav-link" href="nbt-internal.html">NBT internal</a></li>
+        <li><a class="dev-nav-link" href="nbt.html">NBT</a></li>
+        <li><a class="dev-nav-link" href="park.html">Park</a></li>
+        <li><a class="dev-nav-link" href="pass.html">Pass outlets</a></li>
+        <li><a class="dev-nav-link" href="search.html">Search</a></li>
+        <li><a class="dev-nav-link" href="testing.html">Testing</a></li>
+    </ul>
+    <a href="#" id="toggle"><span>Show</span> template nav</a>
+    <a href="#" id="close">close</a>
+</div>
+
+<script>
+
+function deferScript() {
+    if (window.jQuery) {
+        developmentToolbar();
+    } else {
+        setTimeout(function() { deferScript() }, 50);
+    }
+  }
+deferScript();
+
+
+function developmentToolbar() {
+    var $devToolbar = jQuery('#dev-toolbar')
+    var $pageList = jQuery('#page-list');
+    var $toggleButton = jQuery('#toggle');
+    var $closeButton = jQuery('#close');
+
+    $devToolbar.slideDown(200);
+
+    $toggleButton.click(function(e) {
+        e.preventDefault();
+        $pageList.toggleClass('dev-hide');
+
+        if (!$pageList.hasClass('dev-hide')) {
+            $('#toggle span').text('Hide');
+        } else {
+            $('#toggle span').text('Show');
+        }
+    });
+
+    $closeButton.click(function(e) {
+        e.preventDefault();
+        $devToolbar.slideUp(200);
+    });
+};
+</script>

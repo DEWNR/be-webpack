@@ -1,0 +1,641 @@
+// Checkout.scss
+#bookeasy__booking-gadget {
+  max-width: 660px;
+  margin: 0 auto 80px;
+  padding: 1em;
+  min-height: 400px;
+}
+@media only screen and (max-width: 481px) {
+  #bookeasy__booking-gadget {
+    margin: 0 auto;
+    padding-top: 0;
+  }
+}
+#bookeasy__booking-gadget * {
+  font-family: "Frutiger W01", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #4e4e4e;
+}
+#bookeasy__booking-gadget .checkout-cart,
+#bookeasy__booking-gadget .checkout-complete {
+  width: 1000px;
+  margin: 0 auto;
+}
+#bookeasy__booking-gadget div.booking-gadget.BE h3 {
+  color: #003c69;
+  margin: 0;
+  padding-top: 1em;
+  font-size: 18px;
+}
+#bookeasy__booking-gadget div.booking-gadget.BE a {
+  color: #003c69;
+}
+#bookeasy__booking-gadget div.booking-gadget.BE a span {
+  color: #003c69;
+}
+#bookeasy__booking-gadget div.booking-gadget.BE label,
+#bookeasy__booking-gadget div.booking-gadget.BE span {
+  padding-bottom: 10px;
+}
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  form.promoCode
+  input.promoCodeApply {
+  padding: 6px 25px;
+}
+#bookeasy__booking-gadget div.booking-gadget.BE input[type="text"]:focus,
+#bookeasy__booking-gadget div.booking-gadget.BE textarea:focus,
+#bookeasy__booking-gadget div.booking-gadget.BE select:focus,
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  form.promoCode
+  input.promoCode:focus {
+  border: 1px solid #003c69;
+  box-shadow: 0 0 0 2px #003c69;
+}
+#bookeasy__booking-gadget div.booking-gadget.BE select {
+  box-shadow: 0 0 0 2px #fff;
+  margin-right: 1em;
+}
+#bookeasy__booking-gadget div.booking-gadget.BE input[type="text"],
+#bookeasy__booking-gadget div.booking-gadget.BE form.promoCode input.promoCode,
+#bookeasy__booking-gadget div.booking-gadget.BE textarea {
+  transition: all 0.3s ease-in-out;
+  border: 1px solid #ddd;
+  outline: none;
+}
+#bookeasy__booking-gadget div.booking-gadget.BE .acceptCancellationPolicy span {
+  padding-bottom: 0px;
+}
+#bookeasy__booking-gadget div.booking-gadget.BE select,
+#bookeasy__booking-gadget div.booking-gadget.BE textarea,
+#bookeasy__booking-gadget div.booking-gadget.BE input {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+#bookeasy__booking-gadget div.booking-gadget.BE option {
+  line-height: 200%;
+  line-height: 50px;
+}
+#bookeasy__booking-gadget div.booking-gadget.BE span.ccLabel {
+  padding: 0;
+}
+#bookeasy__booking-gadget div.booking-gadget.BE div.button {
+  text-align: right;
+  padding: 0 0 20px;
+}
+#bookeasy__booking-gadget div.booking-gadget.BE div.button a {
+  padding: 1em 1em 0.8em;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  background: #003c69;
+  text-decoration: none;
+}
+#bookeasy__booking-gadget div.booking-gadget.BE div.button a span {
+  padding: 0;
+  line-height: 1.2em;
+  color: #fff;
+}
+#bookeasy__booking-gadget div.booking-gadget.BE div.button a:hover {
+  background-color: #454;
+}
+#bookeasy__booking-gadget div.booking-gadget.BE div.button a:active {
+  background-color: black;
+  outline: none;
+}
+#bookeasy__booking-gadget div.booking-gadget.BE div.button a:active span {
+  color: #fff;
+}
+#bookeasy__booking-gadget div.booking-gadget.BE div.shopping-cart {
+  width: 100%;
+  margin: 0 0 50px;
+  padding: 0;
+  float: none;
+}
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.shopping-cart
+  div.cartItems {
+  border: 0;
+  border-radius: 0;
+  min-height: 0;
+  padding: 0;
+}
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.shopping-cart
+  div.cartItems
+  div.operator {
+  margin-bottom: 0.5em;
+}
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.shopping-cart
+  div.cartItems
+  form.promoCode {
+  clear: both;
+  width: 60.4%;
+  position: relative !important;
+  display: inline-block;
+  border-top: 3px double #ccc;
+  padding-top: 0.3em;
+  bottom: 0.5em;
+  margin-right: 0;
+  padding-right: 0;
+}
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.shopping-cart
+  div.cartItems
+  div.total {
+  /* position: static; */
+  width: 35.05%;
+  right: 0;
+  float: right;
+  position: relative !important;
+  margin-left: 0;
+  padding-left: 0;
+  text-align: right;
+  padding-right: 30px;
+}
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.shopping-cart
+  div.cartItems
+  div.total
+  label {
+  font-size: 18px;
+}
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.shopping-cart
+  div.cartItems
+  div.total
+  span {
+  font-size: 20px;
+}
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.shopping-cart
+  div.cartItems
+  div.item
+  div.remove
+  a {
+  display: block;
+  cursor: pointer;
+  width: 23px;
+  height: 20px;
+  position: absolute;
+  right: 0px;
+  top: 2px;
+  background: none;
+  background-color: darkgray;
+  text-decoration: none;
+}
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.shopping-cart
+  div.cartItems
+  div.item
+  div.remove
+  a:hover {
+  background-color: #b00;
+}
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.shopping-cart
+  div.cartItems
+  div.item
+  div.remove
+  a:before {
+  content: "x";
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 100;
+  font-family: tahoma, verdana, arial, sans-serif;
+  padding-left: 8px;
+  line-height: 1.2em;
+  position: absolute;
+  padding-top: 1px;
+}
+#bookeasy__booking-gadget div.booking-gadget.BE div.personalDetails,
+#bookeasy__booking-gadget div.booking-gadget.BE div.ccDetails {
+  width: 100%;
+  border: 0;
+  padding: 0;
+  border-radius: 0;
+  min-height: 0;
+}
+#bookeasy__booking-gadget div.booking-gadget.BE div.personalDetails > div,
+#bookeasy__booking-gadget div.booking-gadget.BE div.ccDetails > div {
+  float: left;
+  clear: left;
+  width: 100%;
+  box-sizing: border-box;
+}
+#bookeasy__booking-gadget div.booking-gadget.BE div.personalDetails label,
+#bookeasy__booking-gadget div.booking-gadget.BE div.ccDetails label {
+  width: 40%;
+  float: left;
+  margin: 6px 0 0;
+  padding-top: 10px;
+}
+@media only screen and (max-width: 481px) {
+  #bookeasy__booking-gadget div.booking-gadget.BE div.personalDetails label,
+  #bookeasy__booking-gadget div.booking-gadget.BE div.ccDetails label {
+    width: 100%;
+    padding-bottom: 0;
+  }
+}
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.personalDetails
+  .cardTypes
+  label,
+#bookeasy__booking-gadget div.booking-gadget.BE div.ccDetails .cardTypes label {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.personalDetails
+  .cardExpiry
+  label,
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.ccDetails
+  .cardExpiry
+  label {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.shopping-cart
+  div.cartItems
+  form.promoCode
+  input.promoCode,
+#bookeasy__booking-gadget div.booking-gadget.BE div.personalDetails input,
+#bookeasy__booking-gadget div.booking-gadget.BE div.personalDetails select,
+#bookeasy__booking-gadget div.booking-gadget.BE div.ccDetails input,
+#bookeasy__booking-gadget div.booking-gadget.BE div.ccDetails select {
+  font-size: 14px;
+  padding: 10px;
+  width: 60%;
+  box-sizing: border-box;
+  float: left;
+}
+@media only screen and (max-width: 481px) {
+  #bookeasy__booking-gadget div.booking-gadget.BE div.personalDetails input,
+  #bookeasy__booking-gadget div.booking-gadget.BE div.personalDetails select,
+  #bookeasy__booking-gadget div.booking-gadget.BE div.ccDetails input,
+  #bookeasy__booking-gadget div.booking-gadget.BE div.ccDetails select {
+    width: 100%;
+  }
+}
+#bookeasy__booking-gadget div.booking-gadget.BE div.personalDetails select.paym,
+#bookeasy__booking-gadget div.booking-gadget.BE div.ccDetails select.paym {
+  width: 7em;
+}
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.personalDetails
+  select:focus,
+#bookeasy__booking-gadget div.booking-gadget.BE div.ccDetails select:focus {
+  outline: 0;
+}
+#bookeasy__booking-gadget div.booking-gadget.BE div.personalDetails textarea,
+#bookeasy__booking-gadget div.booking-gadget.BE div.ccDetails textarea {
+  width: 55%;
+}
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.personalDetails
+  div.required
+  label::after,
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.ccDetails
+  div.required
+  label::after {
+  content: " *";
+  color: #f00;
+}
+#bookeasy__booking-gadget div.booking-gadget.BE div.personalDetails {
+  margin-bottom: 50px;
+}
+@media only screen and (max-width: 481px) {
+  #bookeasy__booking-gadget div.booking-gadget.BE div.personalDetails {
+    margin-bottom: 20px;
+  }
+}
+#bookeasy__booking-gadget div.booking-gadget.BE div.personalDetails input {
+  margin-top: 6px;
+  margin-bottom: 0;
+}
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.shopping-cart
+  div.cartItems
+  form.promoCode
+  input.promoCode {
+  float: none;
+  margin: 5px 10px;
+  width: 40%;
+}
+#bookeasy__booking-gadget div.booking-gadget.BE div.personalDetails .salutation,
+#bookeasy__booking-gadget div.booking-gadget.BE div.personalDetails .address,
+#bookeasy__booking-gadget div.booking-gadget.BE div.personalDetails .city,
+#bookeasy__booking-gadget div.booking-gadget.BE div.personalDetails .state,
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.personalDetails
+  .WhereDidYouHearId,
+#bookeasy__booking-gadget div.booking-gadget.BE div.personalDetails .comment {
+  display: none;
+}
+#bookeasy__booking-gadget div.booking-gadget.BE div.personalDetails select {
+  width: 55%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.personalDetails
+  div.acceptCancellationPolicy
+  label,
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.personalDetails
+  div.receiveENewsletter
+  label {
+  padding-top: 0;
+  padding-bottom: 10px;
+}
+@media only screen and (max-width: 481px) {
+  #bookeasy__booking-gadget
+    div.booking-gadget.BE
+    div.personalDetails
+    div.acceptCancellationPolicy
+    label,
+  #bookeasy__booking-gadget
+    div.booking-gadget.BE
+    div.personalDetails
+    div.receiveENewsletter
+    label {
+    width: 80%;
+  }
+}
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.personalDetails
+  div.acceptCancellationPolicy
+  input,
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.personalDetails
+  div.receiveENewsletter
+  input {
+  left: initial;
+  left: auto;
+  /* IE */
+  right: initial;
+  right: auto;
+  /* IE */
+}
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.personalDetails
+  div.acceptCancellationPolicy
+  input[type="checkbox"],
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.personalDetails
+  div.receiveENewsletter
+  input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+  top: 2px;
+  margin-left: 8px;
+}
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.ccDetails
+  div.BE_error
+  span.validationError {
+  padding-bottom: 10px;
+}
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.personalDetails
+  div.BE_error
+  span.validationError {
+  padding-left: 41%;
+}
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.cartItems
+  div.item
+  div.bookingQuestions {
+  line-height: 1.6em;
+}
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.cartItems
+  div.item
+  div.price
+  label {
+  width: 10em;
+}
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.cartItems
+  div.cartItems
+  div.total,
+#bookeasy__booking-gadget
+  div.booking-gadget.BE
+  div.cartItems
+  div.cartInOverlay
+  div.cartItems
+  div.total {
+  right: 10px;
+  padding-right: 30px;
+}
+
+.checkout-complete div.bookingComplete,
+.checkout-complete div.booking-complete {
+  width: auto;
+  float: none;
+  border: 0;
+  border-radius: 0;
+  padding: 20px 20px 0;
+  background: rgba(255, 255, 255, 0.95);
+  min-height: 0;
+  margin: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #4e4e4e;
+}
+.checkout-complete div.bookingComplete div.bookingComplete a,
+.checkout-complete div.booking-complete div.bookingComplete a {
+  display: none;
+}
+
+.checkout-complete div.booking-complete {
+  text-align: center;
+  padding-bottom: 40px;
+}
+.checkout-complete div.booking-complete a {
+  display: block;
+  color: #4e4e4e;
+}
+
+.checkout-complete #confirm {
+  display: none;
+}
+
+.acceptCancellationPolicy .validationError {
+  width: 56%;
+  padding-left: 0%;
+}
+.acceptCancellationPolicy .validationError span {
+  margin-left: 40px;
+  display: block;
+  padding-top: 0;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Frutiger W01", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #4e4e4e;
+}
+
+main {
+  background: #fff;
+}
+
+img {
+  max-width: 100%;
+  font-style: italic;
+  vertical-align: middle;
+  border: 0;
+}
+
+.wrapper {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+/*header*/
+.global-header {
+  background: #4e4e4e;
+  box-shadow: 0 -2px 35px rgba(0, 0, 0, 0.8);
+  padding: 9px 0;
+  position: relative;
+  z-index: 150;
+  font-family: "Frutiger W01", Helvetica, Arial, sans-serif;
+}
+.global-header .wrapper {
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+/*a*/
+.global-header__logotype {
+  margin: 0 auto;
+  width: 266px;
+  height: 32px;
+}
+.global-header__logotype img {
+  display: block;
+  margin-top: -5px;
+}
+
+/*div*/
+.page-intro {
+  padding: 2em 1em 1em;
+  max-width: 660px;
+  margin: 0 auto;
+}
+
+/*h1*/
+.page-intro__title {
+  color: #003c69;
+  margin: 0;
+  padding-top: 30px;
+}
+@media only screen and (max-width: 481px) {
+  .page-intro__title {
+    margin: 0;
+    padding-top: 0;
+  }
+}
+
+/*div*/
+.page-intro__content p {
+  margin: 0;
+}
+
+/*footer*/
+.site-footer {
+  background: #4e4e4e;
+  text-align: center;
+  padding: 20px 0;
+}
+
+/*div*/
+.site-footer__logos {
+  padding: 20px 20px 0;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -webkit-justify-content: space-around;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  max-width: 870px;
+  margin: 0 auto;
+}
+
+/*a*/
+.site-footer__logo {
+  margin: 0 0 20px;
+  display: block;
+  width: 152px;
+}
+
+
+/*p*/
+.site-footer__copyright {
+  color: #9f9e9d;
+  margin: 0;
+  padding: 20px;
+}
+.site-footer__copyright a {
+  color: #9f9e9d;
+  text-decoration: none;
+}
+
+/* New style overrides */
+.site-footer__logo:nth-of-type(3) {
+  // hide parks logo in footer
+  // border: red solid 2px;
+  display: none;
+}
+
+div.shopping-cart.BE div.cartItems div.item div.name,
+div.cartInOverlay div.cartItems div.item div.name {
+  // hide icons
+  background-image: none;
+}

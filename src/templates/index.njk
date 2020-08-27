@@ -1,0 +1,165 @@
+{% extends '_layouts/master.njk' %}
+
+{% block bodyClass %}
+  category_home{% endblock bodyClass %}
+
+
+
+{% block content %}
+  <!-- block content -->
+
+  <div class="c-hero-banner c-hero-banner--right" style="background-image: url('https://dummyimage.com/1567x567/BBB/fafafa')">
+
+    <div class="c-hero-banner__image-wrap">
+      <img class="c-hero-banner__image" src="https://dummyimage.com/720x260/BBB/fafafa" alt=""/>
+    </div>
+
+    <div class="c-hero-banner__header o-wrapper o-wrapper--flex o-wrapper--flexcenter">
+      <div class="c-hero-banner__text">
+        <h1 class="c-hero-banner__title"><a href="#parkofthemonth">Celebrate Flinders Chase National Park as Park of the Month in July</a></h1>
+        <h2 class="c-hero-banner__sub-title">No trip to Kangaroo Island is complete without a visit to this iconic park</h2>
+      </div>
+    </div>
+
+    <div class="c-hero-banner__CTA">
+      <a href="#" class="c-hero-banner__CTA-button"><span>Find a</span>
+        <span>Park</span></a>
+      <a href="booking.html" class="c-hero-banner__CTA-button"><span>Book</span>
+        <span>&amp; Pay</span></a>
+    </div>
+
+
+  </div>
+  <!-- /.hero-banner -->
+
+  <div class="c-page-content c-page-content--full">
+
+    {# <div id="App"></div> #}
+
+    <div class="o-wrapper o-wrapper--small">
+      <div class="c-content">
+        <div class="c-content__icon-links">
+          <h2 class="c-icon-link__heading">Activities in parks</h2>
+          <div class="c-icon-link__container">
+            {% for icon in activities %}
+              {% include '_shared/icon-links.njk' %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="o-wrapper o-wrapper--flex@md o-wrapper--flexcenter o-wrapper--small">
+
+      <div class="c-content">
+
+        <div class="c-content__tiles">
+          {% for tile in tiles %}
+
+            {% include '_shared/tiles.njk' %}
+
+          {% endfor %}
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="o-wrapper o-wrapper--small">
+      <div class="c-content">
+        <div class="c-content__icon-links">
+          <h2 class="c-icon-link__heading">More information</h2>
+          <div class="c-icon-link__container">
+            {% for icon in moreInformation %}
+              {% include '_shared/icon-links.njk' %}
+            {% endfor %}
+          </div>
+          <a href="#" class="c-icon-link__button">
+            Even more information
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
+  <div class="c-curator-feed">
+    <div class="o-wrapper">
+      <h2 class="c-curator-feed__heading">Your park pics</h2>
+      <div id="curator-feed" class="">
+
+
+
+      </div>
+    </div>
+  </div>
+
+<!-- /block content -->
+{% endblock content %}
+
+
+
+{% block javascript %}
+<!-- block javascript -->
+
+  {{ super() }}
+  <link rel="stylesheet" type="text/css" href="//cdn.curator.io/3.1/css/curator.css"/>
+  <script type="text/javascript" src="//cdn.curator.io/3.1/js/curator.js"></script>
+  <script type="text/javascript">
+      // Change FEED_ID to your unique FEED_ID
+      var widget = new Curator.Widgets.Grid({
+        apiEndpoint: "https://api.curator.io/v1.1",
+        grid: {
+          minWidth: 200,                 // minimum width of a square in the grid
+          rows: 1,                       // desired number of rows in the grid
+          showLoadMore: true             // show load more button
+        },
+        feedId: '27b6884d-48f2-4948-aefd-62a64cbc', // FEED_ID to load
+        container:'#curator-feed',       // HTML element to hold the feed
+        postsPerPage: 12,                // number of posts per page
+        debug: false,                    // turn debugging on or off
+        lang: 'en',                      // translation used - en, de, it, nl, es
+        maxHeight:0,                     // if > 0 sets the maximum height of a post
+        filter: {
+            showNetworks: false,         // show Networks filter bar
+            showSources: false           // show Sources filter bar
+        }
+      });
+  </script>
+  <script type="text/javascript" src="js/index.js"></script>
+
+<!-- /block javascript -->
+{% endblock javascript %}
+
+
+
+{% set tiles = [
+  {
+    heading : "Kangaroo Island Wilderness Trail",
+    image : {
+      src : "http://via.placeholder.com/720",
+      alt : "KIWT"
+    },
+    link : "#"
+  },
+  {
+    heading : "Cuddle a koala",
+    image : {
+      src : "http://via.placeholder.com/720",
+      alt : "Clealand"
+    },
+    link : "#"
+  },
+  {
+    heading : "Stay in light keeper accomodation",
+    image : {
+      src : "https://www.environment.sa.gov.au/files/sharedassets/parks/parks/kangaroo-island/cape-willoughby-conservation-park/capewillougby-aerial-view-hero.jpg",
+      alt : "Accomodation"
+    },
+    link : "#"
+  }
+] %}

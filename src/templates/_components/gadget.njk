@@ -1,0 +1,128 @@
+<!-- gadget.twig -->
+
+<link as="style" href="/css/bookeasy.css" rel="preload">
+
+<script>
+    BEcssOverride = 'none';
+</script>
+<script src="//gadgets.impartmedia.com/gadgets.jsz?key={{ bookeasy_key }}"></script>
+
+{# <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.js"></script> #}
+
+{# <script src="js/bookeasy.js"></script> #}
+
+{# <script src="js/bookeasy-mods.js"></script> #}
+
+{# <script src="js/inline/details-gadget.js" inline></script>
+
+<script src="js/inline/cart-gadget.js" inline></script> #}
+
+
+<script>
+    console.log('start details gadget inline code');
+
+    // Some variables are defined in the page template of "BookEasy booking page (advanced)" content type
+    // var dcTitle  -- no longer used
+    var bookeasyType = 'tours';
+    var operatorID = 99833;  //99833 85667
+    var bShowGadget = 1;
+    // details gadget defaults
+    var numberConcessions = 45;
+    var xDays = 1;
+
+    if(window.location.hash) {
+        var aHash = window.location.hash.slice(1).split('/');
+        var sType = aHash[1];
+        var aValidTypes = ['accom','tours','events','carhire','packages'];
+
+        var operatorIDregex = /^\d{5}$/;
+        xDays = 1;
+    }
+
+
+
+    if(typeof bookeasyType == 'undefined' || typeof operatorID == 'undefined') {
+        bShowGadget = 0;
+    }
+
+
+    $(function() {
+
+        if(bShowGadget) {
+
+            // getOperatorData(operatorID);
+
+            // load details gadget
+            BE.gadget.details('#bookeasy__details-gadget', {
+                defaultDate: new Date(),
+                descriptionHover: true,
+                period: xDays,
+                productID: operatorID,
+                showHoverInline: true,
+                showQuantity: false,
+                thumbsInGrid: true,
+                type: bookeasyType,
+                showAllAccom: true,
+                showAllTours: true,
+                showAllEvents: true,
+                noInfants: 0,
+                noChildren: 0,
+                noConcessions: numberConcessions,
+
+                vcID: 188
+            });
+
+
+            //add type as a class so we can apply styles
+            // if ( $('html').hasClass('is-'+bookeasyType) ) {
+            //     $('html').removeClass('is-'+bookeasyType);
+            // }
+            // $('html').addClass('is-'+bookeasyType);
+
+        }
+
+    });
+
+
+
+
+    // Gets operatorData, fixes back buttons, displays notices, displays terms & conditions
+    function getOperatorData(id) {
+
+        $.ajax({
+            url: '//sjp.impartmedia.com/be/getOperatorsDetailsShort?q=188&operators=' + id,
+            cache: true,
+            dataType: 'jsonp',
+            jsonpCallback: 'jQueryOperatorsInformation'
+        })
+        .done(function(data) {
+
+            var backURL = '#';
+
+            if (data.length) {
+
+                // This code needs refactoring
+                if(data[0].Location == undefined) {
+                    console.log('BE Location not set');
+                    backLocation = 'Location';
+                } else {
+                    backLocation = data[0].Location; //fall back
+                }
+
+
+                backURL = '/booking#' + backLocation;
+
+                var parkLinkText = '';
+                var importantnotice = '';
+
+                // insert t&c information
+                $('#bookeasy__conditions').html('<h3>Terms and conditions</h3>' );  //+ text2HTML(data[0].CancellationPolicy)
+
+            } else {
+                console.log('error requesting getOperatorsDetailsShort data')
+            }
+
+        });
+
+    }
+</script>

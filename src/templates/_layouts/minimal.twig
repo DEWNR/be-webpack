@@ -1,0 +1,103 @@
+{% set bookeasy_key = 'd5192d41822d0c987a0610af120d29bf' %}
+
+<!doctype html>
+<html lang="en" xml:lang="en" class="no-js" prefix="og: http://ogp.me/ns#">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Department of Environment, Water and Natural Resources (DEWNR){% endblock %}</title>
+
+    <script type="text/javascript" src="//fast.fonts.net/jsapi/e0cc203f-7221-4daf-a2d5-815483dba107.js" async></script>
+
+    <link href="/css/minimal.css" rel="stylesheet">
+
+    <noscript>
+
+        <link type="text/css" rel="stylesheet" href="//fast.fonts.net/cssapi/e0cc203f-7221-4daf-a2d5-815483dba107.css">
+
+    </noscript>
+
+    {% block head %}{% endblock %}
+
+</head>
+
+<body>
+
+    <div class="site-wrap">
+
+
+        <div class="global-header">
+            <div class="wrapper">
+
+                <img class="global-header__logotype" src="images/npsa-logotype.svg" alt="National Parks South Australia" />
+
+            </div>
+        </div>
+
+
+
+
+
+        <div class="content">
+
+
+            <main role="main" class="wrapper">
+
+                <div class="page-intro">
+
+                    <div class="wrapper">
+
+                        <h1 class="page-intro__title">{{ pagetitle }}</h1>
+
+                    </div><!-- /.wrapper -->
+
+                </div>
+
+                {% block content %}
+                {% endblock %}
+            </main>
+
+
+            <footer class="site-footer">
+
+                <div class="wrapper">
+
+                    <div class="site-footer__logos     u-flex">
+
+                        <img class="site-footer__logo" src="images/logo-brandsa.svg" alt="South Australia" />
+                        <img class="site-footer__logo" src="images/logo-govtsa.svg" alt="sa.gov.au" />
+                        <img class="site-footer__logo" src="images/logo-npsa.svg" alt="National Parks South Australia" />
+
+                    </div>
+
+                    <p class="site-footer__copyright">&copy; Copyright, Department of Environment, Water and Natural Resources</p>
+
+                </div><!-- /.wrapper -->
+
+            </footer><!-- /.site-footer -->
+
+
+        </div><!-- /.content -->
+
+    </div><!-- /.site-wrap -->
+
+
+    {% block global_javascript %}
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    {% endblock %}
+
+
+    {% block local_javascript %}{% endblock %}
+
+
+</body>
+
+</html>

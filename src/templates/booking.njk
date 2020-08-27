@@ -1,0 +1,89 @@
+<!-- booking.njk -->
+{% extends '_layouts/master.njk' %}
+
+
+{% block head %}
+  <!-- head -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css">
+  <link href="/css/bookeasy.css" rel="stylesheet">
+{% endblock %}
+
+
+{% block pageHeader %}
+    {{ super() }}
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="c-page-content c-page-content--full">
+
+        <div class="o-wrapper">{# o-wrapper--small #}
+            <div class="c-content">
+
+                <h1 class="c-content__title">Book page</h1>
+
+                <div id="bookeasy__cart-gadget"></div>
+
+                <div class="location-selector  input-group">
+
+                    <input type="text" class="location-selector__input" id="location-selector__input" placeholder="Search for a park...">
+                    <button class="location-selector__clear" value="clear">clear</button>
+
+                </div>
+
+                <div id="bookeasy__region-gadget">Loading...</div>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+
+{% block pageFooter %}
+  {% include '_shared/page-footer.njk' %}
+{% endblock %}
+
+
+{% block javascript %}
+    {{ super() }}
+    {% include '_shared/bookeasy.njk' %}
+{% endblock %}
+
+
+{#
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Details Gadget</title>
+    </head>
+    <body>
+        <h1>Test Book</h1>
+
+        <div id="bookeasy__cart-gadget"></div>
+
+        <div id="bookeasy__details-gadget"></div>
+
+        <script src="//gadgets.impartmedia.com/gadgets.jsz?key=d5192d41822d0c987a0610af120d29bf"></script>
+
+        <script type="text/javascript">
+            //
+
+            $w(function() {
+                BE.gadget.details('#bookeasy__details-gadget', {
+                    vcID: 188,
+                    showAllAccom: true
+                });
+
+                BE.gadget.cart('#bookeasy__cart-gadget', {
+                    bookingURL:'./checkout.html',
+                    vcID: 188
+                });
+            });
+        </script>
+    </body>
+</html>
+ #}

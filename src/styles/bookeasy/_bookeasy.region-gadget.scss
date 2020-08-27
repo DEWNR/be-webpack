@@ -1,0 +1,368 @@
+/*------------------------------------*\
+    #BOOKEASY REGION GADGET
+\*------------------------------------*/
+
+// scss-lint:disable all
+
+
+.booking__early-text {
+    font-size: $sagovau-font-size-base;
+}
+
+#bookeasy__region-gadget {
+    color: $sagovau-color-text-base;
+    font-family: $sagovau-font-family-base;
+    font-size: $sagovau-font-size-base;
+    font-weight: 200;
+    min-height: 110px;
+
+    thead {
+        .date.hidden-xs {
+            > .day,
+            > .month {
+                &:focus,
+                &:hover {
+                    color: inherit;
+                }
+            }
+
+            > .date {
+                &:focus,
+                &:hover {
+                    color: $sagovau-color-book;
+                }
+            }
+        }
+    }
+
+    tbody a {
+        border-bottom: 0;
+        font-weight: normal;
+
+        &.map-link {
+            text-decoration: underline;
+            margin-left: 0;
+
+            @media (min-width: 768px) {
+                margin-left: 220px;
+                display: block;
+            }
+        }
+
+        &:focus,
+        &:hover {
+            color: darken($sagovau-color-brand, 5%);
+            outline: 0;
+            background-color: inherit;
+        }
+
+        &.day,
+        &.date,
+        &.month {
+            &:hover {
+                color: $sagovau-color-brand;
+            }
+        }
+    }
+
+}
+
+
+.region-gadget {
+
+    .im-grid {
+        .OperatorAddress {
+            display: none;
+        }
+        .OperatorDescription {
+            // display: none;  // remove this when campground descriptions go live
+        }
+        .OperatorDescription > .OperatorItemHeading {
+            display: none;
+        }
+
+        .OperatorItem {
+            font-size: 4.1vw;
+        }
+
+        .thumb {
+            width: 210px;
+        }
+    }
+
+    .search-gadget .refineTools {
+        display: inline;
+
+        & > div.facilities,
+        & > div.nameFilter {
+            margin-right: 10px;
+        }
+    }
+
+    .locationFilter,
+    .sortBy,
+    .byOrder,
+    .facilities {
+        display: none;
+    }
+
+    .nameFilter {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .embedded-search {
+        position: relative;
+        z-index: 100;
+        z-index: 1;
+    }
+
+    .thumb {
+        margin-right: 20px;
+        min-height: 102px;
+    }
+
+
+    .property > .name {
+        color: $sagovau-color-brand;
+        font-family: $sagovau-font-family-highlight;
+        font-size: 22px;
+        font-weight: normal;
+        margin-bottom: 10px;
+        display: block;
+        padding-top: 10px;
+        text-decoration: none;
+
+        &:focus,
+        &:hover {
+            color: darken($sagovau-color-brand, 5%);
+            background-color: transparent;
+            outline: 0;
+        }
+    }
+
+    .address {
+        display: block;
+    }
+
+    thead a.day,
+    thead a.month {
+        color: $sagovau-color-text-reverse;
+    }
+
+    .room-name {
+        opacity: 0.5;
+        display: none;
+    }
+
+    .description {
+        margin: 1em 0;
+        color: $sagovau-color-text-base-light;
+    }
+}
+
+.region-gadget {
+
+    @media (max-width: 768px) {
+
+        tbody {
+            width: 100%;
+
+            tr.odd,
+            tr.even,
+            tr.odd td:not(.price),
+            tr.even td:not(.price) {
+                display: block;
+                height: auto;
+            }
+
+            tr.odd>td,
+            tr.even>td {
+                padding: 10px;
+                display: block;
+            }
+
+        }
+
+    }
+
+    td.property {
+        padding-bottom: 6px;
+    }
+}
+
+#bookeasy__region-gadget div.BE.region-gadget div.gadget__region-tabs div.view-choice {
+    a {
+        padding: 0.6em 1.4em 0.8em;
+    }
+
+    a:not(.current):hover {
+        background: tint($sagovau-color-brand, 80%);
+    }
+}
+
+
+
+@media (max-width: 768px) {
+
+
+    .region-gadget {
+
+        .im-grid .thumb {
+            width: 100%;
+        }
+
+        a.name {
+            display: inline-block;
+        }
+
+    }
+
+
+
+    a.button-list__button {
+        font-size: 15px;
+        margin-left: 0;
+    }
+
+    .button-list__button:not(:last-child) {
+        margin-bottom: 10px;
+        margin-right: 8px;
+    }
+
+    .search-gadget.BE div {
+        &.product,
+        &.period,
+        &.adults,
+        &.children,
+        &.infants {
+            width: 52px;
+        }
+    }
+
+
+    .im-pricebutton.sold-out,
+    .sold-out .im-pricebutton,
+    .min-nights .im-pricebutton {
+        padding: 8px 10px;
+    }
+
+
+    .wrap {
+        width: 100%;
+    }
+
+    tr.odd {
+        height: 70px;
+    }
+
+}
+
+
+
+
+@media (min-width: 768px) and (max-width: 1230px) {
+
+    .region-gadget {
+
+        //.manyCols class exists when more than 5 nights selected
+        .manyCols & {
+            div.thumb {
+                max-width: 100%;
+            }
+
+            .im-grid tbody tr td.total {
+                width: 8%;
+            }
+        }
+
+        div.thumb {
+            width: 100%;
+            vertical-align: middle;
+            padding: 0;
+            margin: 10px 20px 4px 0;
+        }
+
+        .specials {
+            width: 140px;
+        }
+
+        .im-grid .property {
+            min-width: 21.5%;
+        }
+
+    }
+
+
+    .im-grid {
+        .thumb img {
+            vertical-align: middle;
+        }
+
+        .specials {
+            left: 100%;
+            top: 20px;
+        }
+
+        .specials .special {
+            width: 80px;
+            margin: 20px auto 5px auto;
+        }
+
+        .property {
+            min-width: 21.5%;
+        }
+
+        tbody tr td.total {
+            width: 14.5%;
+        }
+
+        tbody tr td.price {
+            width: 0;
+            padding: 2px;
+        }
+    }
+
+    .im-pricebutton {
+        width: 100px;
+    }
+
+
+    a.map-link {
+        padding-top: 2px;
+        display: inline-block;
+        width: 160px;
+    }
+
+}
+
+
+
+@media (min-width: 1231px) {
+
+    .region-gadget {
+
+        .description {
+            // width: calc( 100% - 240px);
+            margin-left: 220px;
+        }
+
+        .manyCols & {
+            div.thumb {
+                max-width: 100%;
+            }
+        }
+
+        .im-grid .thumb {
+            padding: 0;
+            margin: 10px 10px 16px 0;
+            max-width: 210px;
+        }
+
+        .im-grid tbody tr td.price {
+            width: 0;
+            padding: 2px;
+        }
+    }
+
+}

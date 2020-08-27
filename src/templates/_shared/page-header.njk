@@ -1,0 +1,59 @@
+{# == PAGE HEADER == #}
+
+<header class="c-page-header">
+
+    <div class="o-wrapper o-wrapper--flex o-wrapper--flexwrap o-wrapper--flexcenter">
+        <a class="c-page-header__logo" href="#" rel="home" itemprop="url">
+            <img class="site-header__logo" src="images/npsa-logotype.svg" alt="National Parks and Wildlife Service SA">
+        </a>
+
+        <div id="bookeasy__cart-gadget"></div>
+
+        <button class="search-toggle" id="search-toggle" type="button" aria-controls="site-search" aria-expanded="false" data-toggle="active" data-toggle-target=".c-search-panel">
+            <span class="search-toggle-svg-wrapper" id="search-toggle-svg-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 40 40">
+                      <defs>
+                        <style>
+                          .cls-1 {
+                            fill: none;
+                          }
+                        </style>
+                      </defs>
+                      <rect class="cls-1" width="40" height="40"></rect>
+                      <g class="search-toggle__layer">
+                          <path d="M24.27,23c2.79-3.76,2-9.06-1.76-11.85s-9.06-2-11.85,1.76c-2.79,3.76-2,9.06,1.76,11.85c3,2.22,7.09,2.22,10.09,0
+                      		l2.59,2.59l1.77-1.77L24.27,23z M21.51,22c-2.25,2.25-5.89,2.25-8.15,0.01c-2.25-2.25-2.25-5.89-0.01-8.15s5.89-2.25,8.15-0.01
+                      		c0,0,0,0,0.01,0.01C23.75,16.11,23.75,19.75,21.51,22z"/>
+                      	<rect x="27.42" y="27.12" transform="matrix(0.7067 -0.7075 0.7075 0.7067 -12.2281 28.8377)" width="2.5" height="4.1"/>
+                      </g>
+                      <path class="search-toggle__layer  search-toggle__layer--active" d="M12.94,27.06c0.59,0.58,1.53,0.58,2.12,0L20,22.12l4.94,4.94c0.61,0.56,1.56,0.53,2.12-0.07c0.54-0.58,0.54-1.47,0-2.05
+                      	L22.12,20l4.94-4.94c0.61-0.56,0.64-1.51,0.07-2.12c-0.56-0.61-1.51-0.64-2.12-0.07c-0.03,0.02-0.05,0.05-0.07,0.07L20,17.88
+                      	l-4.94-4.94c-0.56-0.61-1.51-0.64-2.12-0.07s-0.64,1.51-0.07,2.12c0.02,0.03,0.05,0.05,0.07,0.07L17.88,20l-4.94,4.94
+                      	C12.36,25.52,12.37,26.47,12.94,27.06z"></path>
+                </svg>
+            </span>
+        </button>
+
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false">
+            <span class="menu-toggle-svg-wrapper" id="menu-toggle-svg-wrapper">
+                <svg class="icon icon__menu-toggle" aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100">
+                    <g class="svg__menu-toggle">
+                        <path class="bar line-1" d="M5 13h90v14H5z"/>
+                        <path class="bar line-2" d="M5 43h90v14H5z"/>
+                        <path class="bar line-3" d="M5 73h90v14H5z"/>
+                    </g>
+                </svg>
+            </span>
+            <span class="menu-toggle-text" id="menu-toggle-text">Menu</span>
+        </button>
+
+
+        <div class="c-page-header__search">
+            {% include "_shared/search-panel.njk" %}
+        </div>
+
+
+        {% include "_shared/nav-primary.njk" %}
+    </div>
+
+</header><!-- /.c-page-header -->

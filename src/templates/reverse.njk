@@ -1,0 +1,44 @@
+<!-- booking.njk -->
+{% extends '_layouts/master.njk' %}
+
+
+{% block head %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css">
+  <link href="/css/bookeasy.css" rel="stylesheet">
+{% endblock %}
+
+
+{% block pageHeader %}
+    {{ super() }}
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="c-page-content c-page-content--full">
+
+        <div class="o-wrapper">
+            <div class="c-content">
+
+                <h1 class="c-content__title">Reverse Book page</h1>
+
+                <div id="App"></div>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+
+{% block pageFooter %}
+  {% include '_shared/page-footer.njk' %}
+{% endblock %}
+
+
+{% block javascript %}
+    {{ super() }}
+    {% include '_shared/bookeasy.njk' %}
+    <script type="text/javascript" src="js/index.js"></script>
+{% endblock %}

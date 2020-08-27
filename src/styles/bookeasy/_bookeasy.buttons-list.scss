@@ -1,0 +1,51 @@
+/*------------------------------------*\
+    #BUTTONS LIST
+\*------------------------------------*/
+
+// scss-lint:disable all
+
+
+.button-list {
+    box-sizing: content-box;
+    margin-bottom: 20px;
+
+    &:empty {
+        margin-bottom: 0;
+    }
+}
+
+.button-list__button {
+    display: inline-block;
+    padding: 10px 10px;
+    font-size: $sagovau-font-size-base;
+    font-family: $sagovau-font-family-highlight !important;
+    font-weight: normal !important;
+    color: #fff !important;
+    background-color: $sagovau-color-brand;
+    border: 0;
+    border-radius: 5px;
+    margin-right: 2px;
+    min-width: 88px;
+    // height: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
+
+.button-list__button:not(:first-of-type) {
+    margin-left: 2px;
+}
+
+a.button-list__button {
+    border-bottom: 0;
+    &:hover,
+    &:focus {
+        background-color: darken($sagovau-color-brand, 5%);
+        text-decoration: unset;
+        outline: 0;
+    }
+}
+
+.location-selector + .button-list__button {
+    margin-left: 4px;
+}

@@ -1,0 +1,108 @@
+{# == PRIMARY NAVIGATION == #}
+
+{% set navigation = [
+    {
+        name : "Home",
+        class : "is-active"
+    },
+    {
+        name : "Book & pay"
+    },
+    {
+        name : "Find a park"
+    },
+    {
+        name : "Know before you go",
+        subPages : [
+            "Dogs in parks",
+            "Maps",
+            "Fires & BBQs",
+            "Closures & alerts",
+            "Safety",
+            "Accessibility"
+        ]
+    },
+    {
+        name : "Get inspired",
+        subPages : [
+            "Insider tips",
+            "Park of the month",
+            "Teach & learn",
+            "Nature Play SA"
+        ]
+    },
+    {
+        name : "Understanding parks",
+        subPages : [
+            "Aboriginal culture",
+            "Conservation",
+            "Heritage",
+            "Marine Parks"
+        ]
+    },
+    {
+        name : "Permits & licenses",
+        subPages : [
+            "Drone permits",
+            "Event permits",
+            "Photography & filming permits",
+            "Commercial tour operator licences"
+        ]
+    },
+    {
+        name : "Volunteer",
+        subPages : [
+            "Friends & volunteer groups",
+            "Campground hosts program"
+        ]
+    },
+    {
+        name : "Park Management",
+        subPages : [
+            "Co-management",
+            "What to do if you find an injured animal",
+            "Management plans",
+            "Media releases",
+            "Nature based tourism"
+        ]
+    }
+ ] %}
+
+<div class="c-nav-primary__wrap" id="c-nav-primary__wrap">
+
+    <nav class="c-nav-primary c-page-header__nav" id="c-nav-primary" aria-label="Primary menu">
+
+        <ul class="c-nav-primary__list nav-menu" aria-expanded="false">
+
+            {% for item in navigation %}
+            <li class="c-nav-primary__item {{ item.class }} {% if item.subPages %}has-children{% endif %}">
+
+                <a href="#" class="c-nav-primary__link">
+                    <span>{{item.name}}</span>
+                    <i></i>
+                </a>
+
+                {% if item.subPages %}
+                <nav class="c-nav-primary__sub" role="group" aria-label="sub navigation menu">
+
+                    <ul class="c-nav-primary__sub-links">
+
+                        {% for subPage in item.subPages %}
+                        <li class="">
+                            <a href="#">{{ subPage }}</a>
+                        </li>
+                        {% endfor %}
+
+                    </ul>
+
+                </nav>
+                {% endif %}
+
+            </li>
+            {% endfor %}
+
+        </ul><!-- /.c-nav-primary__list -->
+
+    </nav><!-- /.c-page-header__nav -->
+
+</div><!-- /.c-nav-primary__wrap -->

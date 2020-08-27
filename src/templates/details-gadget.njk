@@ -1,0 +1,47 @@
+{% extends '_layouts/master.njk' %}
+
+{% set pagetitle = 'Details Gadget' %}
+
+
+{% block head %}
+  <!-- head -->
+  {{ super() }}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css">
+  <link href="/css/bookeasy.css" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+
+  <div class="c-page-content c-page-content--full">
+
+      <div class="o-wrapper">{# o-wrapper--small #}
+          <div class="c-content">
+
+              {# <h2>details-gadget here</h2> #}
+
+              <div id="bookeasy__cart-gadget"></div>
+
+              <div id="bookeasy__details-gadget"></div>
+
+              <div id="bookeasy__conditions"></div>
+
+          </div>
+      </div>
+
+  </div>
+
+{% endblock %}
+
+
+{% block pageFooter %}
+  {% include "_shared/page-footer.njk" %}
+{% endblock %}
+
+
+{% block javascript %}
+
+    {{ super() }}
+    {% include '_shared/bookeasy.njk' %}
+
+{% endblock %}

@@ -1,0 +1,118 @@
+.category_booking {
+
+    .fancybox-caption {
+        text-align: left;
+    }
+
+    .fancybox-image {
+        box-shadow: 0px 0px 10px 3px rgba(0,0,0, 0.3);
+        border: 0px solid transparent !important;
+        transform: scale(0);
+    }
+
+    .fancybox-slide--complete .fancybox-image {
+        box-sizing: border-box;
+        // border-radius: 5px;
+        // border-color: #fff !important;
+        // border-width: 10px !important;
+        transform: scale(1);
+    }
+
+    // .fancybox-navigation {
+    //     .fancybox-button {
+    //         border-radius: 50%;
+    //         border: 1px solid #ccc;
+    //     }
+    // }
+
+    .fancybox-is-open .fancybox-bg {
+        opacity: 0.3 !important;
+    }
+
+}
+
+.fancybox-caption-wrap {  // this div doesn't exist on live site
+    padding: 0;
+    // background: linear-gradient(180deg,transparent 0,rgba(0,0,0,.6) 20%,rgba(0,0,0,.7) 40%,rgba(0,0,0,.7) 80%,rgba(0,0,0,.7));
+}
+.fancybox-caption {
+    padding: 30px 60px;
+    // border-top: 1px solid hsla(0,0%,100%,.4);
+    border-top: none;
+    font-size: 14px;
+    color: #fff;
+    background: rgba(0,0,0,.8);
+    line-height: 20px;
+
+    .dark {
+        color: #7f7f7a;
+    }
+}
+// overide a annoying Parks style when live
+.c-content__body ul.general-images__wrap {
+    max-width: 100%;
+}
+
+.fancybox-button--arrow_right svg {
+    padding-right: 8px;
+}
+
+.fancybox-button--arrow_left svg {
+    padding-left: 8px;
+}
+
+.fancybox-button {
+    display: inline-block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    background: transparent;
+    color: #ddd;
+    border-radius: 0;
+    cursor: pointer;
+    vertical-align: top;
+    outline: none;
+}
+
+.fancybox-button:hover:not([disabled]) {
+    color: #fff;
+    background: rgba(0,0,0,.8);
+}
+
+.fancybox-button--close:before {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.fancybox-button--close:after {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.fancybox-button--close:after,
+.fancybox-button--close:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    height: 2px;
+    width: 16px;
+    top: calc(50% - 1px);
+    left: calc(50% - 8px);
+}
+
+.fancybox-button:after,
+.fancybox-button:before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    background-color: currentColor;
+    color: currentColor;
+    opacity: .9;
+    box-sizing: border-box;
+    display: inline-block;
+}

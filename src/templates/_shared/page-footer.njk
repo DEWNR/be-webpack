@@ -1,0 +1,121 @@
+{% set footerLinks = [
+    {
+        "heading" : "Find",
+        "class" : "u-hidden u-display-inline-block-large-and-up",
+        "links" : [ "Camping & accomodation",
+                    "Park experiences",
+                    "another heading"
+        ]
+    },
+    {
+        "heading" : "Important information",
+        "class" : "u-hidden u-display-inline-block-large-and-up",
+        "links" : [ "Fees and passes",
+                    "Safety",
+                    "Park closures",
+                    "Fire restrictions",
+                    "Fire management",
+                    "Park management"
+        ]
+    },
+    {
+        "heading" : "Our Places",
+        "class" : "",
+        "links" : [ "Marine parks",
+                    "Cleland Wildlife Park",
+                    "Seal Bay",
+                    "Naracoorte Caves",
+                    "Mount Lofty Summit",
+                    "Botanic Gardens of South Australia",
+                    "Adelaide Gaol"
+        ]
+    },
+    {
+        "heading" : "get involved",
+        "class" : "u-hidden u-display-inline-block-large-and-up",
+        "links" : [ "Friends and volunteers groups",
+                    "Campground hosts",
+                    "Commercial tour operators",
+                    "Have your say"
+        ]
+    }
+] %}
+
+{#
+    {
+        "heading" : "Contact us",
+        "class" : "",
+        "links" : [ "By phone or email",
+                    "Facebook"
+        ]
+    } #}
+
+<div class="o-wrapper--footer">
+    <div class="c-acknowledgement">
+        <div class="o-wrapper">
+            <div class="c-acknowledgement__content">
+                <div class="c-acknowledgement__image">
+                    <img src="https://dummyimage.com/450x308/BBB/fafafa" alt="Acknowledgement of country">
+                </div>
+                <div class="c-acknowledgement__description">
+                    <h2 class="c-acknowledgement__title">Acknowledgement of Country</h2>
+                    <p>We acknowledge and respect the Traditional Custodians whose ancestral lands we live and work upon and we pay our respects to their Elders past and present. We acknowledge and respect the deep spiritual connection and the relationship that Aboriginal and Torres Strait Islander people have to Country.</p>
+                    <p>We also pay our respects to the cultural authority of Aboriginal and Torres Strait Islander people and their nations in South Australia, as well as those across Australia.</p>
+                    <!-- <p class="caption">caption text</p> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="c-page-footer">
+        <div class="o-wrapper">
+            <div class="c-page-footer__top">
+                {% for item in footerLinks %}
+                <div class="footer-list {{ item.class }}">
+                    <h4>{{ item.heading | title }}</h4>
+
+                    <ul class="o-list-bare">
+                        {% for item in item.links %}
+                        <li><a href="#">{{ item }}</a></li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+                {% endfor %}
+                <div class="footer-list">
+                    <h4>Contact Us</h4>
+                    <ul class="o-list-bare">
+                        <li><a href="#">Email or phone</a></li>
+                        <li class=""><a href="#"><i class="fa fa-facebook-square fa-2x u-margin-right-small"></i>Facebook</a></li>
+                        <li><a href="#"><i class="fa fa-instagram fa-2x u-margin-right-small"></i>Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="c-page-footer__bottom">
+            <div class="o-wrapper">
+                <div class="o-layout">
+                    <div class="o-layout__item u-6/12@lg">
+                        <ul class="c-page-footer__nav">
+                            <li class="c-page-footer__nav-item"><a href="#">Disclaimer</a></li>
+                            <li class="c-page-footer__nav-item"><a href="#">Privacy</a></li>
+                            <li class="c-page-footer__nav-item"><a href="#">Accessibility</a></li>
+                            <li class="c-page-footer__nav-item"><a href="#">Agent Login</a></li>
+                        </ul>
+                        <p class="c-page-footer__smallprint"><a href="/copyright">Copyright &copy; Department for Environment and Water 2018</a>. All rights reserved.</p>
+                    </div>
+                    <div class="o-layout__item u-6/12@lg">
+                        <ul class="c-footer-logos">
+                            <li><a href="#" target="_blank"><img src="https://www.environment.sa.gov.au/files/templates/00000000-0000-0000-0000-000000000000/f88a7f3c-df7e-430a-825c-24cfa8dec9a8/alpha-footer-gosa.svg" alt=""></a></li>
+                            <li><a href="#" target="_blank"><img src="https://www.environment.sa.gov.au/files/templates/00000000-0000-0000-0000-000000000000/f88a7f3c-df7e-430a-825c-24cfa8dec9a8/alpha-footer-south-australia.svg" alt=""></a></li>
+                            <li><a href="#" target="_blank"><img src="https://www.environment.sa.gov.au/files/templates/00000000-0000-0000-0000-000000000000/f88a7f3c-df7e-430a-825c-24cfa8dec9a8/alpha-footer-sagovau.svg" alt=""></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+</div>

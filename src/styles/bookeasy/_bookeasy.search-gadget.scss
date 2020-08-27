@@ -1,0 +1,271 @@
+/*------------------------------------*\
+    #BOOKEASY SEARCH GADGET
+\*------------------------------------*/
+
+.BE {
+
+    .search-gadget {
+        background: $sagovau-color-brand;
+        border: 0;
+        color: $sagovau-color-text-base;
+        font-family: $sagovau-font-family-base;
+        font-size: $sagovau-font-size-base;
+        font-weight: 200;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        padding: 10px;
+        position: relative;
+
+        &.loading div.spinner {
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: $sagovau-color-brand;
+            opacity: 0.98;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+
+            span,
+            span::before,
+            span::after {
+                border-radius: 50%;
+                width: 2em;
+                height: 2em;
+                animation-fill-mode: both;
+                animation: spinner 1.8s infinite ease-in-out;
+            }
+
+            span {
+                color: $sagovau-color-text-reverse;
+                font-size: 10px;
+                margin: 5px auto;
+                position: relative;
+                text-indent: -9999em;
+                transform: translateZ(0);
+                animation-delay: -0.16s;
+                display: block;
+
+                &::before,
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                }
+
+                &::before {
+                    left: -3.5em;
+                    animation-delay: -0.32s;
+                }
+
+                &::after {
+                    left: 3.5em;
+                }
+
+            }
+        }
+
+        div.product,
+        div.date,
+        div.period,
+        div.adults,
+        div.concessions,
+        div.children,
+        div.infants {
+            display: inline-block;
+            margin-right: 10px;
+            width: 80px;
+        }
+
+        div.children,
+        div.infants,
+        div.students,
+        div.observers,
+        div.maxPrice,
+        div.accommTypes {
+            display: none;
+        }
+
+        select,
+        .pseudo,
+        .input input {
+            font-family: $sagovau-font-family-base;
+            font-size: $sagovau-font-size-base;
+            padding: .5em;
+            background: $sagovau-color-background-base;
+            border: 2px solid $sagovau-color-background-base;
+            border-radius: 3px;
+            color: $sagovau-color-text-base;
+            width: 100%;
+            appearance: none;
+            outline: 0;
+            // line-height: 1;
+            font-weight: 200;
+            box-sizing: border-box;
+
+            &:focus {
+                border-color: $sagovau-color-background-base;
+            }
+        }
+
+        div.date {
+            width: 160px;
+
+            .input {
+                display: block;
+            }
+
+            .pseudo {
+                display: block;
+                width: auto;
+            }
+        }
+
+        .label {
+            font-family: $sagovau-font-family-highlight;
+            display: block;
+            color: $sagovau-color-text-reverse;
+            overflow: hidden;
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        div.button   {
+            display: none;
+        }
+
+        .refineTools {
+            > div,
+            .byWhich {
+                margin: 0 0 10px;
+            }
+
+            .byWhich,
+            .byOrder {
+                width: 100px;
+                display: inline-block;
+                margin-right: 10px;
+            }
+        }
+
+        .showHideRefineTools {
+            // display: none;
+        }
+
+    }
+
+
+    .wdDatePicker-Outer {
+        display: block;
+        border: 1px solid $sagovau-color-brand;
+        background: $sagovau-color-background-odd; // #f3f3f3;
+    }
+
+
+    .wdDatePicker_calendar {
+        font-family: $sagovau-font-family-base;
+        background: $sagovau-color-background-base;
+        color: $sagovau-color-text-base;
+
+        select {
+            padding: 4px;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        th,
+        td {
+            width: 34px;
+            text-align: center;
+            padding: 0;
+
+            &:first-child { border-left: 0; }
+        }
+
+        th {
+            line-height: 20px;
+            text-transform: uppercase;
+            background: $sagovau-color-background-odd;
+            border-left: 1px solid $sagovau-color-background-odd;
+            font-size: 12px;
+            border-top: 1px solid $sagovau-color-border; // #c2c2c2;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        td {
+            font-size: 11px;
+            font-weight: bold;
+            border-top: 1px solid $sagovau-color-border; // #c2c2c2;
+            border-left: 1px solid $sagovau-color-border; // #c2c2c2;
+
+            b,
+            i {
+                display: block;
+                width: 34px;
+                height: 30px;
+                font-size: 14px;
+                line-height: 30px;
+                text-align: center;
+                padding-top: 2px;
+
+                &:hover {
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+            }
+
+            &.disabled {
+                background: $sagovau-color-background-odd;
+            }
+
+            &.unavailable {
+                background: transparent url('/search-sprites.png') no-repeat -175px -94px;
+
+                b,
+                i {
+                    opacity: 0.4;
+                    cursor: default;
+                    text-decoration: none;
+                }
+            }
+
+            &.selected {
+                background: transparent url('/search-sprites.png') no-repeat -171px -141px;
+            }
+        }
+    }
+
+
+    #wdDatePicker-chronNav {
+        a {
+            position: absolute;
+            top: 12px;
+            width: 22px;
+            height: 22px;
+            background: transparent url('/search-sprites.png') no-repeat left top;
+            cursor: pointer;
+
+
+            &#wdDatePicker-previous {
+                left: 5px;
+                margin-left: 5px;
+                background-position: left -176px;
+            }
+
+
+            &#wdDatePicker-next {
+                right: 5px;
+                background-position: -45px -176px;
+            }
+
+        }
+
+        span {
+            display: none;
+        }
+    }
+
+}

@@ -1,0 +1,703 @@
+console.log('bookeasy-mods');
+
+var resizeTimer;
+var windowWidth = $(window).width();
+var isMobile = false;
+var isAccom = false;
+var selectedDays = 1;
+var campgroundDataHost = '';
+var campgroundData;
+
+$(document).on('gadget.script.loaded', function() {
+
+    // if running locally point to the remote campground data
+    if ( !window.location.hostname.match('sa.gov.au') ) {
+        campgroundDataHost = 'https://www.parks.sa.gov.au';
+    }
+
+    // get campground-data from RSS
+    $.getScript(campgroundDataHost + '/feed.rss?listname=npsa-cl-campground-data', function(){
+
+        if (campgroundData == null) {
+            console.warn('campgroundData not loaded!');
+        }
+
+    });
+
+
+
+    // initialise region gadget watchers // may be required when filters change?
+    IMUtility.pushRegionGadgetLoadedEvent();
+    IMUtility.pushRegionGadgetChangedEvent();
+    // initialise details gadget watchers
+    IMUtility.pushDetailsContentLoadedEvent();
+
+    // check if mobile device
+    isMobile = windowWidth < 767 ? true : false;
+
+    // check if type is accomodation
+    if($('html').hasClass('is-accom')) {
+        isAccom = true;
+    }
+
+
+
+
+    /**
+     * Subscribe to built in gadget events
+     */
+
+    // style tabs once refine tools are built
+    $w.event.subscribe('region.refinetools.built', function() {
+        console.log('region.refinetools.built');
+
+        if (($('.tabs-group').size() > 0) && ($('.gadget__region-tabs').size() > 0)) {
+            $('.gadget__region-tabs').remove();
+        }
+
+        $('.tabs-group').addClass('gadget__region-tabs').removeClass('tabs-group');
+
+        // remove option to select 0 adults
+        $('.adults select option[value=0]').attr('disabled', 'disabled').hide();
+
+
+    });
+
+
+
+
+
+    // tasks to do on details gadgets
+    $w.event.subscribe('details.content.ready', function() {
+
+        console.log('details.content.ready');
+
+        // Display concession input for Kangaroo Island Tour Pass & Ewens Ponds CP & Pic Ponds CP
+        if ( operatorID == '97738' || operatorID == '91777' || operatorID == '72030' ) {
+            $('.search-gadget div.concessions').css({'display': 'inline-block', 'width': '80px'});
+        }
+
+        // remove option to select 0 adults
+        if ( operatorID != '97738' || operatorID != '72030' || operatorID != '91777') {  //except for Pic snorkelling & Ewens snorkelling which have concessions
+            $('.adults select option[value="0"]').attr('disabled', 'disabled').hide();
+        }
+
+        // rename 'Date' to 'Start date' for parks passes page
+        if (typeof operatorID) { // only if defined
+            if (operatorID == '81657') { // only if parks passes
+                $('.details-gadget .search-gadget .date .label span').html('Start Date');
+            } else
+            if (operatorID == '65339' || operatorID == '96528' || operatorID == '96529' || operatorID == '96530') { // remove concessions & infants if diving
+                $('.details-gadget .search-gadget .infants, .details-gadget .search-gadget .concessions').attr('disabled', 'disabled').hide();
+            } else
+            if (operatorID == '72030' || operatorID == '91777') { // remove infants if snorkelling
+                $('.details-gadget .search-gadget .infants').attr('disabled', 'disabled').hide();
+            }
+        }
+    });
+
+
+    // is fired when details-gadget grid.rendered
+    $w.event.subscribe('grid.rendered', function() {
+
+        console.log('grid.rendered');
+
+        // get days selected and add/remove class
+        selectedDays = getDaysSelected('details');
+
+
+        // detect when last row loaded
+        $('.im-grid tbody>tr:last-child .OperatorInfo').IMElementExists(function() {
+
+            if(isMobile) {
+                updateProductRows('details');
+            }
+
+            // load hi-res images
+            insertImages('details');
+
+            // replace text
+            replaceRoomText(document.querySelector('.details-gadget'));
+
+        });
+
+    });
+
+
+    // Cart Gadget Events
+    $w.event.subscribe('cart.save.complete', function(any) {
+        console.log('cart.save.complete');
+        console.log('any: ', any);
+        setTimeout('pushCartItemsLoadedEvent();', 300);
+    });
+    $w.event.subscribe('details.init.start', function() {
+        console.log('details.init.start');
+        balanceNoConcessionsOrAdults();
+    });
+
+
+
+
+    $w.event.subscribe('region.view.change', function() {
+        console.log(' region.view.change');
+    });
+    $w.event.subscribe('region-search-locations-loaded', function() {
+        console.log('region-search-locations-loaded');
+    });
+    $w.event.subscribe('region.loading.end', function() {
+        console.log('region.loading.end');
+    });
+    $w.event.subscribe('region.loading.start', function() {
+        console.log('region.loading.start');
+    });
+
+
+    $w.event.subscribe('region.gadget.loaded', function() {
+        // region.gadget.loaded only occurs after the last row of the prices-grid is rendered
+
+        // console.warn('region.gadget.loaded');
+
+        // show hidden descriptions
+        $('.OperatorInfoHidden').removeClass('.OperatorInfoHidden');
+
+        // hide unneccesary info
+        $('.im-grid tbody tr.inline-header').hide();
+
+        var oMaps = getMapData();
+
+        $('.prices-grid td.date').addClass('hidden-xs'); // used in bookeasy-utility to determine if loaded
+
+        // get days selected and add/remove class
+        selectedDays = getDaysSelected('region');
+
+
+        if(isMobile) {
+            updateProductRows('region');
+        }
+
+        // console.log('insert map.');
+
+        // add maps
+        $('.im-grid tr.odd, .im-grid tr.even').each(function(i){  // for each row (odd & even rows)
+
+            var $property = $(this).find('td.property');
+            var sOberatorID = $(this).attr('id').replace('Operator', '');
+
+            // read oMaps and find a match for current operator
+            if (typeof oMaps[sOberatorID] !== 'undefined' && oMaps[sOberatorID].length) {
+                $property.append('<a class="map-link" href="http://www.parks.sa.gov.au' + oMaps[sOberatorID] + '" download="filename">View map <span>(pdf)</span></a>');
+            }
+
+        });
+
+
+        // load hi-res images
+        insertImages('region');
+
+    });
+
+
+});
+
+
+function isConcessionsHidden() {  //tests if the concession input is hidden
+    var hidden = true;
+    if ( $('.concessions').length ) {
+        hidden = false;
+    } else if ( $('.concessions').is(":hidden") ) {
+        hidden = false;
+    }
+    return hidden;
+}
+
+
+
+
+
+
+
+
+
+
+function balanceNoConcessionsOrAdults() {
+    console.log('balanceNoConcessionsOrAdults');
+
+    //cookie names change so we need to find the right cookie
+    function findBookeasyCookieName() {
+        // uses a known portion of the cookie value to return the cookieName
+        // console.log('document.cookie: ', document.cookie);
+        var cookieName = document.cookie.substr(0, document.cookie.indexOf('=%7B%22product%22%3A%22'));
+        cookieName = cookieName.substr(cookieName.length - 32);
+        // console.log('cookieName: ', cookieName);
+        return cookieName;
+    }
+
+    var beCookieName = findBookeasyCookieName();
+
+    //only run if no concessions
+    var be_cookie_data = JSON.parse( readCookie( beCookieName ) );
+    if ( typeof be_cookie_data ) {
+        if ( be_cookie_data != null ) {
+            if ( typeof be_cookie_data.adults ) {
+                // console.log(be_cookie_data.adults);
+                if ( isConcessionsHidden() ) {
+                    var adultsval = 2;
+                    if ( (be_cookie_data.adults > 0) && (!isNaN(be_cookie_data.adults)) ) {
+                        adultsval = be_cookie_data.adults;
+                    }
+                    be_cookie_data.adults = adultsval;
+                    $(".adults .input select").val(adultsval).trigger('change'); //set current to 1
+                    console.warn("adults value changed.");
+                    eraseCookie(beCookieName);
+                    createCookie(beCookieName, be_cookie_data, 1);
+                }
+                //
+            }
+            //
+        }
+    }
+
+
+    var adultsinput = '';
+    var concessionsinput = '';
+
+    $(".adults .input select").change(function () {
+        concessionsinput = $(".concessions .input select").val();
+        console.log('concessionsinput: ', concessionsinput);
+        if ($(this).val() == '0') {
+            if (concessionsinput == '0') {
+                $(".concessions .input select").val('1').trigger('change'); //set current to 1
+                console.error("0 disabled for concessionsinput.");
+            }
+            $('.concessions .input select option[value="0"]').attr('disabled', 'disabled').hide(); //hide 0
+        }
+        else if (concessionsinput != '0') {
+            $('.concessions .input select option[value="0"]').removeAttr('disabled').show(); //show 0
+            console.error("0 enabled for concessionsinput.");
+        }
+    });
+
+    $(".concessions .input select").change(function () {
+        // window.sessionStorage.setItem("BE_concessions", $(this).val()); //store number of concessions
+        adultsinput = $(".adults .input select").val();
+        console.log('adultsinput: ', adultsinput);
+        if ($(this).val() == '0') {
+            if (adultsinput == '0') {
+                $(".adults .input select").val('1').trigger('change'); //set current to 1
+                console.error("0 disabled for concessionsinput.");
+            }
+            $('.adults .input select option[value="0"]').attr('disabled', 'disabled').hide(); //hide 0
+        }
+        else if (adultsinput != '0') {
+            $('.adults .input select option[value="0"]').removeAttr('disabled').show(); //show 0
+            console.error("0 enabled for adultsinput.");
+        }
+    });
+
+}
+
+
+
+
+
+function updateProductRows(gadget) {
+
+
+    var $dateHeaders = $('.im-grid thead td.date').clone();
+    var rowsString = '.im-grid tr.odd, .im-grid tr.even';
+
+    if(gadget === 'region') {
+        rowsString = '.im-grid .accom tr.odd, .im-grid .accom tr.even';
+    }
+
+    // loop over each product row and modify
+    $(rowsString).each(function() {
+        var $product = $(this);
+        // var priceTable = '<td><table class="price_table">';
+
+        // move heading after thumbnail
+        $product.find('td.name div.thumb').eq(0).after( $product.find('td.name>a') );
+
+        // create price table
+        $product.find('td.price').each(function(index) {
+            $product.find('td.price').eq(index).prepend('<span class="price__date">' + $dateHeaders[index].innerHTML + '</span>');
+        });
+
+        if(gadget === 'region') {
+            $('.inline-header').remove();
+        }
+
+        // insert new product table
+        $product.wrapInner('<td><table class="product" width="100%"></td>');
+
+        // remove quantity (not needed for accomodation)
+        $('td.total').parent().addClass('product__row--total');
+
+        // add specials
+        $product.find('.product__row--total .total').after('<td class="product__row--specials"></td>');
+        $product.find('.product__row--specials').append($product.find('div.specials').addClass('product__row--specials'));
+    });
+
+    // remove header content
+    $('thead','.im-grid').remove();
+
+
+}
+
+
+
+
+
+function getDaysSelected(gadgetType) {
+    var sReturn = 1;
+
+    if (gadgetType == 'details') {
+        sReturn = $('thead>tr>td.date', '.priceGrid').length;
+    }
+    if (gadgetType == 'region') {
+        sReturn = $('thead>tr>td.date', '.accom').length;
+    }
+
+    // if (typeof variable == 'undefined') {
+    //     sReturn = $('thead>tr>td.date', '.accom').length;
+    // }
+
+    // console.log(gadgetType);
+
+    // change things up if lots of days selected
+    if(sReturn > 5) {
+        $('html').addClass('manyCols');
+    } else {
+        $('html').removeClass('manyCols');
+    }
+
+    return sReturn;
+}
+
+
+
+
+
+function getMapData() {
+    var oReturn = [];
+
+    $.each(campgroundData, function(key, value) {
+
+        if ( key.indexOf(',') != -1 ){
+
+            var aIDs = key.split(',');
+
+            $.each(aIDs, function(i) {
+                oReturn[aIDs[i]] = value;
+            });
+
+        } else {
+            oReturn[key] = value;
+        }
+
+    });
+
+    return oReturn;
+}
+
+
+
+
+
+function insertImages(gadget) {
+    var thumbCount = 0;
+
+    // loop over thumbnails
+    $('img', '.thumb').each(function(){
+        var $thumbnail = $(this);
+        var imagePath = $thumbnail.attr('rel');
+        var productTitle = '';
+
+
+        if(gadget == 'details') {
+            productTitle = $thumbnail.parent().prev().text();
+            $thumbnail.attr('src', imagePath).wrap('<a class="be-fancybox" href="' + imagePath + '" data-fancybox="gallery" data-caption="' + productTitle + '"></a>');
+        } else {
+            imagePath = imagePath.replace('thumbs/461', 'images');
+            productTitle = $thumbnail.parent().siblings('.name').text();
+            $thumbnail.wrap('<a class="be-fancybox" href="' + imagePath + '" data-fancybox="gallery" data-caption="' + productTitle + '"></a>');
+        }
+
+    });
+
+}
+
+
+// some text replacements defined here
+function replaceRoomText(node) {
+  if (node.nodeType == 3) {
+    node.data = node.data.replace(/Room Configuration:/g, 'Configuration:');
+  }
+  if (node.nodeType == 1 && node.nodeName != "SCRIPT") {
+    for (var i = 0; i < node.childNodes.length; i++) {
+      replaceRoomText(node.childNodes[i]);
+    }
+  }
+}
+
+// wrap fancybox in IMElementExists function so it is initialised after the element exists.
+$('.be-fancybox').IMElementExists(function() {
+
+    $('[data-fancybox="gallery"]').fancybox({
+        toolbar: false,
+        hash: false,
+        clickOutside: "close",
+        clickContent: false,
+        loop: true
+    });
+
+});
+
+
+
+
+// done resizing event
+// $(window).on('resize', function(e) {
+//
+//   clearTimeout(resizeTimer);
+//   resizeTimer = setTimeout(function() {
+//
+//     // resizing as stopped, do things!
+//     windowWidth = $(window).width();
+//
+//   }, 250);
+//
+// });
+
+
+// get AccomRatesGridData from local storage or BE API
+getAccomRatesGridData();
+
+var GENERAL_IMAGES;
+
+var cachedAccomRatesGridData;
+function actOnData(returnedData) {
+    cachedAccomRatesGridData = returnedData;
+}
+
+
+$w.event.subscribe('details.gadget.locationheader', function() {
+    // console.log('details.gadget.locationheader');
+
+    // The below line enables campground General images
+    displayGeneralCampgroundImages();
+
+});
+
+function displayGeneralCampgroundImages() {
+
+    // filter to current OperatorID
+    // set generalImages with images from the current operatorID
+    $(cachedAccomRatesGridData).each(function () {
+        if (operatorID == this.OperatorId) {
+            GENERAL_IMAGES = this.OtherImages;
+        };
+    });
+
+    var imageTiles = '';
+    var captions = {};
+
+    // example captions. To view some of these http://localhost:3000/details-gadget.html#/accom/65306.
+    captions = {
+        '465870':	'Picnic table, Rocky River',
+        '465871':	'Postmans Cottage',
+        '465872':	'Cape Barren Goose',
+        '465874':	'Bunk bed, Mays Cottage',
+        '465876':	'Fireplace, Postmans Cottage',
+        '121291':	'Flinders Light Lodge',
+        '121292':	'Cape Borda Lightstation',
+        '121294':	'Hartley Hut',
+        '121295':	'Woodward Hut',
+        '121296':	'Kitchen, Hartley Hut',
+        '121297':	'Flinders Light Lodge, Dusk',
+        '121299':	'Cape du Couedic Lighthouse',
+        '121300':	'Parndana Lodge, Dusk',
+        '121302':	'Parndana Lodge',
+        '121301':	'Cape du Couedic Lighthouse',
+        '439165':	'Inneston Lake',
+        '450136':	'Engineers Lodge',
+        '471372':	'Bedroom One, Norfolk Lodge',
+        '471373':	'Bedroom Two, Norfolk Lodge',
+        '471374':	'Lounge Room, Norfolk Lodge',
+        '471375':	'Woodfire, Norfolk Lodge',
+        '471376':	'Sitting Room, Mallee Lodge, ',
+        '471377':	'Kitchen, Mallee Lodge',
+        '471378':	'Bathroom, Mallee Lodge',
+        '471379':	'.Lounge Room, Managers Lodge',
+        '471743':	'Lounge Room, Managers Lodge',
+        '471380':	'Kitchen and Dining, Managers Lodge',
+        '471381':	'Bedroom One, Managers Lodge',
+        '471451':	'Bedroom, Managers Room',
+        '471452':	'Bathroom, Managers Room',
+        '471453':	'Kitchen, Managers Room',
+        '471454':	'Kitchen, Shearers Quarters',
+        '471455':	'Sitting Room, Shearers Quarters',
+        '471456':	'Bedroom, Shearers Quarters',
+        '471457':	'Outdoor firepit, Shearers Quarters',
+        '471458':	'Bathroom, Shearers Quarters'
+    };
+
+    if (GENERAL_IMAGES.length > 0) { // if there are general images
+
+        // prepare HTML for each image
+        for (var i = 0; i < GENERAL_IMAGES.length; i++) {
+            var thumb = GENERAL_IMAGES[i].ThumbnailImage;
+            var fullImg = GENERAL_IMAGES[i].FullSizeImage;
+            //set default caption as the image Id
+            var imgId = GENERAL_IMAGES[i].Id;
+            var caption = ' ';
+            var captionHTML = '<span class=\'dark\'>' + imgId + ':</span> ';
+            // console.log('generalImages[i].Id: ', generalImages[i].Id);
+            // console.log('captions.458042: ', captions[458042]);
+            //set caption if we have one for that specific image Id
+            if (captions[imgId]) {
+                caption = captions[imgId];
+                captionHTML = '<span class=\'dark\'>' + imgId + ':</span> ' + caption;
+            }
+            imageTiles = imageTiles + '<li><a data-fancybox="galleryGeneral" href="' + fullImg + '" data-caption="' + captionHTML + '"><img src="' + thumb + '" title="' + caption + '" alt="' + caption +'"> </a></li>';
+        }
+
+        $('.location-header').append('<div class="general-images"><h3>General images</h3><ul class="general-images__wrap">' + imageTiles + '</ul></div>');
+
+
+        // defer function will wait until fancybox function is available
+        function defer(amethod) {
+
+            if (typeof jQuery.fn.fancybox === 'function') {
+                // console.log('fancybox detected.');
+                amethod();
+            } else {
+                console.log('wait for fancybox.');
+                setTimeout(function() { defer(amethod) }, 50);
+            }
+
+        }
+
+
+        defer(function () {
+
+            // initialise galleryGeneral fancybox
+            if ( jQuery('[data-fancybox="galleryGeneral"]').length > 0 ) {
+                console.log('initialise fancybox galleryGeneral.');
+
+                jQuery('[data-fancybox="galleryGeneral"]').fancybox({
+                    // idleTime: false,
+                    buttons : [
+                    // 'share',
+                    // 'thumbs',
+                    'close'
+                  ]
+                });
+
+            }
+
+        });
+
+
+    }
+
+}
+
+function getAccomRatesGridData() {
+    // console.log('run get API data');
+    //      here we fetch from BE api only if we don't have a local storage cache
+    //      to keep API requests lower
+
+    // read from local storage cache if it exists
+    var JSONcache = JSON.parse( localStorage.getItem('cacheAccomRatesGridData') );
+    var cacheFound = false;
+    // if no local storage cache then fetch
+    if (JSONcache === null ) {
+        // setup fetch
+        setupRequest(cacheFound);
+    } else {
+        cacheFound = true;
+        //store data in local storage
+        console.log('found localstorage.');
+        actOnData(JSONcache);
+        setupRequest(cacheFound); //we make a request even if we have local storage to update the local storage.
+    }
+
+
+    function setupRequest(cacheFound) {
+        var apiurl = 'https://webapi.bookeasy.com.au/api/getAccomRatesGrid';
+        var parameters = '?q=188'
+            + '&enforceBookingConditions=false'
+            + '&enforceEntirePeriod=false'
+            + '&ExternalSearch=false'
+            + '&includeInactiveOperators=false';
+        getDataFromAPI(apiurl + parameters, function (dataFromAPI) {
+            // after fetch write response to local storage cache
+            var cache_asString = JSON.stringify(dataFromAPI);
+            localStorage.setItem('cacheAccomRatesGridData', cache_asString);
+            // console.log('wrote cache to localstorage: ');
+
+            if (!cacheFound) {
+                actOnData(dataFromAPI);
+            }
+        });
+    }
+
+  }
+
+
+
+function getDataFromAPI(fullApiUri, callback) {
+
+    // console.log('before ajax');
+
+    $.ajax({
+        type: "GET",
+        url: fullApiUri,
+        dataType: "json",
+        success: function (response) {
+            callback(response.Data);
+            // callback returns response.Data;
+        },
+        failure: function (response) {
+            console.error('error from ajax get request: ', response);
+        }
+    });
+
+    // console.log('after ajax');
+
+}
+
+
+
+
+// Cookie functions from https://www.quirksmode.org/js/cookies.html
+function createCookie(name, value, days) {
+    var expires;
+
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+    } else {
+        expires = "";
+    }
+    document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + expires + "; path=/";
+}
+
+function readCookie(name) {
+    var nameEQ = encodeURIComponent(name) + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) === ' ')
+            c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0)
+            return decodeURIComponent(c.substring(nameEQ.length, c.length));
+    }
+    return null;
+}
+
+function eraseCookie(name) {
+    createCookie(name, "", -1);
+}
